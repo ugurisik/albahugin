@@ -92,5 +92,19 @@ namespace albahugin
             Console.WriteLine("EFT:" + eft.ToString());
             return eft;
         }
+
+        [DllExport]
+        public static int printSysInfo()
+        {
+            Core c = new Core();
+            return c.sysInfo();
+        }
+
+        [DllExport]
+        public static int printDayReport()
+        {
+            Core c = new Core();
+            return c.periodicDateReport();
+        }
     }
 }

@@ -506,5 +506,44 @@ namespace albahugin
             }
         }
 
+        public int sysInfo()
+        {
+            try
+            {   
+                // TODO:: Not Working!
+                CPResponse response = new CPResponse(this.Printer.PrintSystemInfoReport(2));
+                if (response.ErrorCode == 0)
+                {
+                    Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
+                }
+                return response.ErrorCode;
+            }
+            catch (Exception e)
+            {
+                Log(FormMessage.OPERATION_FAILS + ": " + e.Message);
+                return 500;
+            }
+        }
+
+        public int periodicDateReport()
+        {
+            try
+            {
+                DateTime lastDay = DateTime.Now;
+                DateTime firstDay = lastDay.AddDays(-1);
+                CPResponse response = new CPResponse(this.Printer.PrintPeriodicDateReport(firstDay,lastDay,0,true));
+                if (response.ErrorCode == 0)
+                {
+                    Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
+                }
+                return response.ErrorCode;
+            }
+            catch (Exception e)
+            {
+                Log(FormMessage.OPERATION_FAILS + ": " + e.Message);
+                return 500;
+            }
+        }
+
     }
 }
