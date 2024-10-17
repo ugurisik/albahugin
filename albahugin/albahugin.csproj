@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DDD627B-71FC-46F4-9396-EE7FCE758474}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>albahugin</RootNamespace>
+    <AssemblyName>albahugin</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Build.Framework.16.0.461\lib\net472\Microsoft.Build.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Utilities.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Build.Utilities.Core.16.0.461\lib\net472\Microsoft.Build.Utilities.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Setup.Configuration.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.Setup.Configuration.Interop.1.16.30\lib\net35\Microsoft.VisualStudio.Setup.Configuration.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RGiesecke.DllExport.Metadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8f52d83c1a22df51, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnmanagedExports.Repack.Upgrade.1.2.1\lib\net472\RGiesecke.DllExport.Metadata.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>C:\Users\UGUR\source\repos\albahugin\albahugin\bin\x64\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="Connection.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core.cs" />
+    <Compile Include="CPResponse.cs" />
+    <Compile Include="ErrorCode.cs" />
+    <Compile Include="FormMessage.cs" />
+    <Compile Include="Hugin\Common\CertificateException.cs" />
+    <Compile Include="Hugin\Common\CertificateMatchException.cs" />
+    <Compile Include="Hugin\Common\CertificateNotValidException.cs" />
+    <Compile Include="Hugin\Common\CertificateTypeException.cs" />
+    <Compile Include="Hugin\Common\CertificateVerifyException.cs" />
+    <Compile Include="Hugin\Common\Customer.cs" />
+    <Compile Include="Hugin\Common\DeviceInfo.cs" />
+    <Compile Include="Hugin\Common\FieldLengthExceededException.cs" />
+    <Compile Include="Hugin\Common\GMP3Exception.cs" />
+    <Compile Include="Hugin\Common\InvalidLicenseKeyException.cs" />
+    <Compile Include="Hugin\Common\IPProtocol.cs" />
+    <Compile Include="Hugin\Common\LeafCertificateNotFoundException.cs" />
+    <Compile Include="Hugin\Common\LeafCertificateNotLoadException.cs" />
+    <Compile Include="Hugin\Common\LeafOkcCertificateVerifyException.cs" />
+    <Compile Include="Hugin\Common\MessageState.cs" />
+    <Compile Include="Hugin\Common\OkcCertificateNotFoundException.cs" />
+    <Compile Include="Hugin\Common\OkcCertificateNotLoadException.cs" />
+    <Compile Include="Hugin\Common\OutOfRangeException.cs" />
+    <Compile Include="Hugin\Common\PortClosedException.cs" />
+    <Compile Include="Hugin\Common\PrinterCorruptDataException.cs" />
+    <Compile Include="Hugin\Common\RootCertificateNotFoundException.cs" />
+    <Compile Include="Hugin\Common\RootCertificateNotLoadException.cs" />
+    <Compile Include="Hugin\Common\RootCertificateVerifyException.cs" />
+    <Compile Include="Hugin\Common\RootLeafCertificateVerifyException.cs" />
+    <Compile Include="Hugin\Common\Service.cs" />
+    <Compile Include="Hugin\Common\Utils.cs" />
+    <Compile Include="Hugin\Common\ValueExceededMaxException.cs" />
+    <Compile Include="Hugin\DiffieHellman\BigInteger.cs" />
+    <Compile Include="Hugin\DiffieHellman\DiffieHellman.cs" />
+    <Compile Include="Hugin\DiffieHellman\StrongNumberProvider.cs" />
+    <Compile Include="Hugin\ExDevice\AsyncClient.cs" />
+    <Compile Include="Hugin\ExDevice\CertificateManager.cs" />
+    <Compile Include="Hugin\ExDevice\Close.cs" />
+    <Compile Include="Hugin\ExDevice\Command.cs" />
+    <Compile Include="Hugin\ExDevice\DEFINED_DESK_VERSION.cs" />
+    <Compile Include="Hugin\ExDevice\ExtDevCommon.cs" />
+    <Compile Include="Hugin\ExDevice\FPURequest.cs" />
+    <Compile Include="Hugin\ExDevice\FPUResponse.cs" />
+    <Compile Include="Hugin\ExDevice\HSMessageContext.cs" />
+    <Compile Include="Hugin\ExDevice\HSState.cs" />
+    <Compile Include="Hugin\ExDevice\IConnection.cs" />
+    <Compile Include="Hugin\ExDevice\ISecureComm.cs" />
+    <Compile Include="Hugin\ExDevice\KeyExchange.cs" />
+    <Compile Include="Hugin\ExDevice\MatchingState.cs" />
+    <Compile Include="Hugin\ExDevice\OnMessageEventArgs.cs" />
+    <Compile Include="Hugin\ExDevice\OnMessageHandler.cs" />
+    <Compile Include="Hugin\ExDevice\SecureComm.cs" />
+    <Compile Include="Hugin\ExDevice\SerialConnection.cs" />
+    <Compile Include="Hugin\ExDevice\Start.cs" />
+    <Compile Include="Hugin\ExDevice\StateObject.cs" />
+    <Compile Include="Hugin\ExDevice\T300Close.cs" />
+    <Compile Include="Hugin\ExDevice\T300HSState.cs" />
+    <Compile Include="Hugin\ExDevice\T300KeyExchange.cs" />
+    <Compile Include="Hugin\ExDevice\T300SecureComm.cs" />
+    <Compile Include="Hugin\ExDevice\T300SerialConnection.cs" />
+    <Compile Include="Hugin\ExDevice\T300Start.cs" />
+    <Compile Include="Hugin\ExDevice\T300TCPConnection.cs" />
+    <Compile Include="Hugin\ExDevice\TCPConnection.cs" />
+    <Compile Include="Hugin\GMPCommon\CrcIncng16.cs" />
+    <Compile Include="Hugin\GMPCommon\CrcVF16.cs" />
+    <Compile Include="Hugin\GMPCommon\FPUCommonTags.cs" />
+    <Compile Include="Hugin\GMPCommon\FPUDataTags.cs" />
+    <Compile Include="Hugin\GMPCommon\FPUGroupTags.cs" />
+    <Compile Include="Hugin\GMPCommon\FPURequestMessageTypeTags.cs" />
+    <Compile Include="Hugin\GMPCommon\FPUResponseMessageTypeTags.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPCommonTags.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPConstants.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPDataTags.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPField.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPGroup.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPGrupTags.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPItem.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPMessage.cs" />
+    <Compile Include="Hugin\GMPCommon\GMPResCodes.cs" />
+    <Compile Include="Hugin\GMPCommon\HSMErrorCode.cs" />
+    <Compile Include="Hugin\GMPCommon\HSMessageTags.cs" />
+    <Compile Include="Hugin\GMPCommon\HSMGrupTags.cs" />
+    <Compile Include="Hugin\GMPCommon\ICrc16Computer.cs" />
+    <Compile Include="Hugin\GMPCommon\Logger.cs" />
+    <Compile Include="Hugin\GMPCommon\LogLevel.cs" />
+    <Compile Include="Hugin\GMPCommon\MessageBuilder.cs" />
+    <Compile Include="Hugin\GMPCommon\POSDataTags.cs" />
+    <Compile Include="Hugin\GMPCommon\POSMessageTags.cs" />
+    <Compile Include="Hugin\GMPCommon\ProgramConfig.cs" />
+    <Compile Include="Hugin\GMPCommon\State.cs" />
+    <Compile Include="Hugin\GMPCommon\TubitakTestCase.cs" />
+    <Compile Include="Hugin\GMPCommon\Utililty.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\Adjustment.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\AdjustmentType.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\BackgroundWorker.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\CompactPrinter.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\CompactPrinterInt.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\DailySummary.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\EndOfReceipt.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\ICompactPrinter.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\ICompactPrinterInt.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\JSONDocument.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\JSONItem.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\JSONSlipContent.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\JSONSlipLine.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\OnFileSendingProgressEventArgs.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\OnFileSendingProgressHandler.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\OnReportLineEventArgs.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\OnReportLineHandler.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\PaymentInfo.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\PaymentType.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\ProgramOption.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\Settings.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\SFResponse.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\SFResponseLabel.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\SFResponseObject.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\SummaryItem.cs" />
+    <Compile Include="Hugin\POS\CompactPrinter\FP300\VatGroupSale.cs" />
+    <Compile Include="IBridge.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatusCode.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\UnmanagedExports.Repack.Upgrade.1.2.1\build\UnmanagedExports.Repack.Upgrade.targets" Condition="Exists('..\packages\UnmanagedExports.Repack.Upgrade.1.2.1\build\UnmanagedExports.Repack.Upgrade.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Bu proje bu bilgisayarda olmayan NuGet paketlerine başvuru yapıyor. Bunları indirmek için NuGet Paket Geri Yükleme'yi kullanın. Daha fazla bilgi için, bkz. http://go.microsoft.com/fwlink/?LinkID=322105. Eksik dosya: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\UnmanagedExports.Repack.Upgrade.1.2.1\build\UnmanagedExports.Repack.Upgrade.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UnmanagedExports.Repack.Upgrade.1.2.1\build\UnmanagedExports.Repack.Upgrade.targets'))" />
+  </Target>
+</Project>

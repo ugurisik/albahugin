@@ -1,0 +1,38 @@
+using System.ComponentModel;
+
+namespace Hugin.GMPCommon { 
+
+public enum HSMErrorCode
+{
+	[Description("İŞLEM BAŞARILI")]
+	SUCCESS = 0,
+	[Description("MESAJ BÜTÜNLÜĞÜ DOĞRULAMA HATASI")]
+	DATA_INTEGRITY_ERROR = 10,
+	[Description("GEÇERSİZ MESAJ")]
+	INVALID_MESSAGE = 11,
+	[Description("MESAJ UZUNLUĞU DOĞRULAMA HATASI")]
+	INVALID_MESSAGE_LEN = 12,
+	[Description("LRC DOĞRULAMA HATASI")]
+	LRC_VERIFY_ERROR = 13,
+	[Description("CRYPTOGRAM-A DOĞRULAMA HATASI")]
+	CRYPTOGRAM_A_VERIFY_ERROR = 14,
+	[Description("BİLİNMEYEN TERMİNAL SERİ NUMARASI")]
+	UNKNOWN_TERMINAL_SERIAL = 20,
+	[Description("BİLİNMEYEN TAG")]
+	UNKNOWN_DATA_TAG = 30,
+	[Description("TAG UZUNLUĞU HATASI")]
+	TAG_LENGTH_ERROR = 31,
+	[Description("TAG VERİSİ OKUMA HATASI")]
+	TAG_VALUE_ERROR = 32,
+	[Description("SERTİFİKA DOĞRULAMA HATASI")]
+	CERTIFICATE_VERIFY_ERROR = 40,
+	[Description("HARİCİ CİHAZ KABUL EDİLMEDİ")]
+	ST_NOT_ALLOWED = 51,
+	[Description("HARİCİ CİHAZ SÜRE AŞIMI")]
+	ST_HAS_EXPIRED = 52,
+	[Description("PARAMETRE YÜKLENMELİ")]
+	ST_NEED_PARAM_LOAD = 53,
+	[Description("GEÇERSİZ İŞLEM")]
+	INVALID_OPERATION = 90
+}
+}
