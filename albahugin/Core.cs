@@ -15,9 +15,13 @@ namespace albahugin
         public bool isMatchedBefore = false;
         public IConnection Connection { get { return conn; } set { conn = value; } }
         public ICompactPrinter Printer { get { return printer; } set { printer = value; } }
+        public static string logFilePath = "";
+        public static string documentNo = "";
+        public string docId = "";
         public void Log(string log)
         {
             Console.WriteLine(Utils.ClearTurkishCharacter(log));
+            LogToFile(log);
         }
         public void Log()
         {
@@ -65,6 +69,14 @@ namespace albahugin
             }
         }
 
+        public static void LogToFile(string message)
+        {
+            using (StreamWriter writer = new StreamWriter("C:\\ALBAPOS\\log\\"+logFilePath, true))
+            {
+                writer.WriteLine(message);
+            }
+        }
+
         private static string fiscalId = "";
 
         public void SetFiscalId(string strId)
@@ -102,6 +114,25 @@ namespace albahugin
             }
             catch (Exception ex) {
                 Log(FormMessage.OPERATION_FAILS + "--> " + FormMessage.CONNECTION_ERROR + ": " + ex.Message);
+                return 500;
+            }
+        }
+
+        public int checkConnection()
+        {
+            try {
+                if (this.Connection != null)
+                {
+                    Log(FormMessage.CONNECTED);
+                    return 200;
+                }
+                else {
+                    Log(FormMessage.CONNECTIONNOTFOUND);
+                    return 404;
+                }
+            }
+            catch (Exception e) {
+                Log(FormMessage.CONNECTION_ERROR);
                 return 500;
             }
         }
@@ -301,11 +332,11 @@ namespace albahugin
             }
         }
 
-        public int closeDoc()
+        public int closeDoc(bool slipCopy)
         {
             try
             {
-                CPResponse response = new CPResponse(this.Printer.CloseReceipt(true));
+                CPResponse response = new CPResponse(this.Printer.CloseReceipt(false));
                 if (response.ErrorCode == 0)
                 {
                     Log(FormMessage.DOCUMENT_ID.PadRight(12, ' ') + ":" + response.GetNextParam());
@@ -342,16 +373,23 @@ namespace albahugin
         {
             try
             {
+                docId = "";
                 CPResponse response = new CPResponse(Printer.PrintDocumentHeader());
                 if (response.ErrorCode == 0)
                 {
-                    Log(FormMessage.DOCUMENT_ID.PadRight(12, ' ') + ":" + response.GetNextParam());
+                    docId = response.GetNextParam();
+                    Log(FormMessage.DOCUMENT_ID.PadRight(12, ' ') + ":" + docId);
+                }
+                else {
+                    Log("startPaymentErr:"+response.ErrorMessage + " StatusMessage:"+response.StatusMessage);
+                    docId = "-1";
                 }
                 return response.ErrorCode;
             }
             catch (Exception ex)
             {
                 Log(FormMessage.OPERATION_FAILS + ": " + ex.Message);
+                docId = "-1";
                 return 500;
             }
         }
@@ -394,6 +432,11 @@ namespace albahugin
                     string batch = response.GetNextParam();
                     string stan = response.GetNextParam();
                     string totalPaidAmount = response.GetNextParam();
+
+                    for (int i = 0; i < response.ParamList.Count; i++) {
+                        Log(response.ParamList[i].ToString());                    
+                    }
+
 
                     Log(String.Format("İşlem Tutarı   :{0}", paidAmount));
                     Log(String.Format("Ödeme Toplamı  :{0}", totalPaidAmount));

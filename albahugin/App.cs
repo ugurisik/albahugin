@@ -1,10 +1,36 @@
 ﻿using RGiesecke.DllExport;
 using System;
+using static albahugin.Core;
 
 namespace albahugin
 {
     public class App
     {
+        public static string docId = "";
+
+        [DllExport]
+        public static void logPath(string fName)
+        {
+            Core.logFilePath = fName;
+        }
+
+        [DllExport]
+        public static string documentId()
+        {
+            Console.WriteLine("documentId method called! --> "+ "documentNo: " + Core.documentNo + " this.docId:"+docId);
+            if (String.IsNullOrEmpty(Core.documentNo)) {
+                Core.documentNo = "-2";
+            }
+            return Core.documentNo;
+        }
+
+        [DllExport]
+        public static int checkConnection() { 
+            Core c = new Core();
+            return c.checkConnection();
+        }
+
+
         [DllExport]
         public static int Connect(string ipAddress, int port, string fiscal) { 
             Core c = new Core();
@@ -45,10 +71,10 @@ namespace albahugin
         }
 
         [DllExport]
-        public static int close()
+        public static int close(bool slipCopy)
         {
             Core c = new Core();
-            if (c.closeDoc() == 0)
+            if (c.closeDoc(slipCopy) == 0)
             {
                 Console.WriteLine("CloseDoc");
                 return 0;
@@ -69,6 +95,8 @@ namespace albahugin
         {
             Core c = new Core();
             int start = c.startPayment();
+            Core.documentNo = c.docId;
+            docId = c.docId;
             Console.WriteLine("Start:" + start.ToString());
             return start;
         }
