@@ -102,6 +102,23 @@ namespace albahugin
         }
 
         [DllExport]
+        public static int startPaymentWithHeader(string tc, string slipno, int type)
+        {
+            Core c = new Core();
+            int start = c.startPaymentWithHeader(tc,slipno, type);
+            Core.documentNo = c.docId;
+            docId = c.docId;
+            Console.WriteLine("Start:" + start.ToString());
+            return start;
+        }
+
+        [DllExport]
+        public static int PrintRemarkLine(string[] lines) {
+            Core c = new Core();
+            return c.PrintRemarkLine(lines);
+        }
+
+        [DllExport]
         public static int saleItem(double total, double itemPrice, double itemQuantity, int itemNo)
         {
             decimal t = (decimal)total;

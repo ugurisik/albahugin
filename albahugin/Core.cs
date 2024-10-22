@@ -375,6 +375,7 @@ namespace albahugin
             {
                 docId = "";
                 CPResponse response = new CPResponse(Printer.PrintDocumentHeader());
+                //CPResponse response = new CPResponse(Printer.PrintDocumentHeader(1, "11111111111", "1234FISNO", new DateTime()));
                 if (response.ErrorCode == 0)
                 {
                     docId = response.GetNextParam();
@@ -382,6 +383,33 @@ namespace albahugin
                 }
                 else {
                     Log("startPaymentErr:"+response.ErrorMessage + " StatusMessage:"+response.StatusMessage);
+                    docId = "-1";
+                }
+                return response.ErrorCode;
+            }
+            catch (Exception ex)
+            {
+                Log(FormMessage.OPERATION_FAILS + ": " + ex.Message);
+                docId = "-1";
+                return 500;
+            }
+        }
+
+        public int startPaymentWithHeader(string tc, string slipno , int type)
+        {
+            try
+            {
+                docId = "";
+                //CPResponse response = new CPResponse(Printer.PrintDocumentHeader());
+                CPResponse response = new CPResponse(Printer.PrintDocumentHeader(type, tc, slipno, new DateTime()));
+                if (response.ErrorCode == 0)
+                {
+                    docId = response.GetNextParam();
+                    Log(FormMessage.DOCUMENT_ID.PadRight(12, ' ') + ":" + docId);
+                }
+                else
+                {
+                    Log("startPaymentErr:" + response.ErrorMessage + " StatusMessage:" + response.StatusMessage);
                     docId = "-1";
                 }
                 return response.ErrorCode;
@@ -579,6 +607,25 @@ namespace albahugin
                 {
                     Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
                 }
+                return response.ErrorCode;
+            }
+            catch (Exception e)
+            {
+                Log(FormMessage.OPERATION_FAILS + ": " + e.Message);
+                return 500;
+            }
+        }
+
+        public int PrintRemarkLine(string[] lines)
+        {
+            try
+            {
+                CPResponse response = new CPResponse(this.Printer.PrintRemarkLine(lines));
+                if (response.ErrorCode == 0)
+                {
+                    Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
+                }
+                Log("lines:" + response.ErrorCode + " | "+ response.ErrorMessage + " | "+response.StatusCode + " | " + response.StatusMessage);
                 return response.ErrorCode;
             }
             catch (Exception e)
