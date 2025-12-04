@@ -109,6 +109,7 @@ namespace albahugin
                     Connection.Close();
                     Connection = null;
                     Log(FormMessage.DISCONNECTED);
+                    this.Connect(ipAddress,port,fiscal);
                 }
                 return 0;
             }
@@ -626,6 +627,25 @@ namespace albahugin
                     Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
                 }
                 Log("lines:" + response.ErrorCode + " | "+ response.ErrorMessage + " | "+response.StatusCode + " | " + response.StatusMessage);
+                return response.ErrorCode;
+            }
+            catch (Exception e)
+            {
+                Log(FormMessage.OPERATION_FAILS + ": " + e.Message);
+                return 500;
+            }
+        }
+
+        public int PrintBarcode(int type, string barcodeQr)
+        {
+            try
+            {
+                CPResponse response = new CPResponse(this.Printer.PrintReceiptBarcode(type, barcodeQr));
+                if (response.ErrorCode == 0)
+                {
+                    Log(FormMessage.OPERATION_SUCCESSFULL + ":" + response.GetNextParam());
+                }
+                Log("lines:" + response.ErrorCode + " | " + response.ErrorMessage + " | " + response.StatusCode + " | " + response.StatusMessage);
                 return response.ErrorCode;
             }
             catch (Exception e)

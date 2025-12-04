@@ -119,6 +119,12 @@ namespace albahugin
         }
 
         [DllExport]
+        public static int PrintBarcode(int type, string barcodeQr) {
+            Core c = new Core();
+            return c.PrintBarcode(type, barcodeQr);
+        }
+
+        [DllExport]
         public static int saleItem(double total, double itemPrice, double itemQuantity, int itemNo)
         {
             decimal t = (decimal)total;
